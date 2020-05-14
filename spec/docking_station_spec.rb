@@ -1,7 +1,8 @@
 require_relative '../lib/docking_station'
 
 describe DockingStation do
-    docking_station = DockingStation.new
-    subject {docking_station}
-    it { is_expected.to respond_to(release_bike)}
+
+  it "should respond to #release_bike" do
+    expect(DockingStation.new).to respond_to(:release_bike)
   end
+end
