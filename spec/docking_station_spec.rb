@@ -6,9 +6,14 @@ describe DockingStation do
     expect(station).to respond_to(:release_bike)
   end
 
-  it "should return a bike after #release_bike is called" do
+  it "should release a bike after #release_bike is called" do
     station.dock(Bike.new)
     expect(station.release_bike).to be_an_instance_of(Bike)
+  end
+
+  it "should not release a broken bike" do
+    station.dock(Bike.new.report_broken)
+    expect{ station.release_bike }.to raise_error("There are no bikes available.")
   end
 
   it "should respond to #dock" do
@@ -36,4 +41,10 @@ describe DockingStation do
   it "should accept a capacity when called" do
     expect(DockingStation).to respond_to(:new).with(1).argument
   end
+
+  it "should have a default capacity of 20" do
+    expect(station.capacity).to eq(20)
+  end
+
+
 end
